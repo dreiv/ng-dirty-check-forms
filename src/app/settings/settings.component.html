@@ -1,1 +1,20 @@
-<p>settings works!</p>
+<form [formGroup]="settings">
+  <label>
+    Name<br />
+    <input type="text" formControlName="settingOne" />
+  </label>
+
+  <label>
+    Select option<br />
+    <select formControlName="settingTwo">
+      <option value="jack">Jack</option>
+      <option value="lucy">Lucy</option>
+      <option value="tom">Tom</option>
+    </select>
+  </label>
+
+  <label>
+    Checkbox<br />
+    <input type="checkbox" formControlName="settingThree" />
+  </label>
+</form>
