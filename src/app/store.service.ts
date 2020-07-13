@@ -17,4 +17,8 @@ export class StoreService {
 
     this.data$ = this.data.asObservable();
   }
+
+  update(value: any): void {
+    this.data.next(value);
+  }
 }
