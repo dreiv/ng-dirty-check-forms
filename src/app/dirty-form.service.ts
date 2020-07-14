@@ -11,7 +11,7 @@ export interface DirtyComponent {
   providedIn: 'root'
 })
 export class DirtyFormGuard implements CanDeactivate<DirtyComponent> {
-  canDeactivate(component: DirtyComponent) {
+  canDeactivate(component: DirtyComponent): Observable<boolean> {
     return component.isDirty$.pipe(
       switchMap((dirty: any) => {
         if (dirty === false) {

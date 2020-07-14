@@ -7,14 +7,16 @@ import {
   startWith
 } from 'rxjs/operators';
 
-export function dirtyCheck<U>(source: Observable<U>) {
+export function dirtyCheck<U>(
+  source: Observable<U>
+): <T>(valueChanges: Observable<T>) => Observable<boolean> {
   let subscription: Subscription;
-  const isDirty = false;
+  let isDirty = false;
 
   return <T>(valueChanges: Observable<T>): Observable<boolean> => {
-    const isDirty$ = combineLatest(source, valueChanges).pipe(
+    const isDirty$ = combineLatest([source, valueChanges]).pipe(
       debounceTime(300),
-      map(([a, b]) => !Object.is(a, b)),
+      map(([a, b]) => (isDirty = !Object.is(a, b))),
       finalize(() => subscription.unsubscribe()),
       startWith(false),
       shareReplay({ bufferSize: 1, refCount: true })

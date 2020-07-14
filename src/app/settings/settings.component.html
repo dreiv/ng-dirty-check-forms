@@ -18,5 +18,5 @@
     <input type="checkbox" formControlName="settingThree" />
   </label>
 
-  <input type="submit" value="Save" />
+  <input *ngIf="isDirty$ | async" type="submit" value="Save" />
 </form>
